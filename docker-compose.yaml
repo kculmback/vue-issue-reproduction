@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run serve
+    tty: true
+    ports:
+      - 0:3000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - local
+      - proxy
+
+networks:
+  local:
+    external: false
+  proxy:
+    external: true
